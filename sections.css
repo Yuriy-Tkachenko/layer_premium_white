@@ -567,6 +567,15 @@ body {
   *,*:before,*:after { animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; transition-delay:0ms!important }
   .js .hero .eyebrow,.js .hero h1,.js .hero .description,.js .hero .actions,.js .hero .lawyer-photo,.js .reveal { opacity:1; transform:none }
 }
+
+/* Unified page grid: matches the header and hero gutters */
+@media (min-width: 761px) {
+  .section-wrap,
+  .footer-legal {
+    width: calc(100% - 13.5vw);
+    max-width: none;
+  }
+}
 .calendar {
   display: block;
   width: 23px !important;
