@@ -1,3 +1,11 @@
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
+
+window.addEventListener("pageshow", () => {
+  requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0 }));
+});
+
 const toggle = document.querySelector(".menu-toggle");
 const nav = document.querySelector("#nav");
 toggle?.addEventListener("click", () => {
@@ -10,14 +18,6 @@ nav?.addEventListener("click", () => {
   nav.classList.remove("open");
   toggle?.setAttribute("aria-expanded", "false");
 });
-const scrollTopButton = document.querySelector(".scroll-top");
-const updateScrollTop = () =>
-  scrollTopButton?.classList.toggle("is-visible", window.scrollY > 500);
-window.addEventListener("scroll", updateScrollTop, { passive: true });
-updateScrollTop();
-scrollTopButton?.addEventListener("click", () =>
-  window.scrollTo({ top: 0, behavior: "smooth" }),
-);
 const closeMenu = () => {
   nav?.classList.remove("open");
   toggle?.setAttribute("aria-expanded", "false");
@@ -34,6 +34,33 @@ document.addEventListener("click", (event) => {
     closeMenu();
 });
 
+const consultationDialog = document.querySelector("#consultation-dialog");
+const consultationTriggers = document.querySelectorAll(
+  '.service-grid a[href="#contacts"], [data-open-consultation]',
+);
+
+consultationTriggers.forEach((trigger) => {
+  trigger.addEventListener("click", (event) => {
+    if (!consultationDialog?.showModal) return;
+    event.preventDefault();
+    consultationDialog.showModal();
+  });
+});
+
+consultationDialog
+  ?.querySelector("[data-close-consultation]")
+  ?.addEventListener("click", () => consultationDialog.close());
+
+consultationDialog?.addEventListener("click", (event) => {
+  const bounds = consultationDialog.getBoundingClientRect();
+  const inside =
+    event.clientX >= bounds.left &&
+    event.clientX <= bounds.right &&
+    event.clientY >= bounds.top &&
+    event.clientY <= bounds.bottom;
+  if (!inside) consultationDialog.close();
+});
+
 document.documentElement.classList.add("js");
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const revealGroups = [
@@ -44,6 +71,8 @@ const revealGroups = [
   ".three-cards article",
   ".steps li",
   ".stage-list article",
+  ".faq-intro",
+  ".faq-list details",
   ".fact-row span",
   ".footer-grid > *",
 ];
