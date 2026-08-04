@@ -1,0 +1,10 @@
+{
+  "name": "layer-premium",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "node build.mjs",
+    "start": "node server.js"
+  },
+  "engines": { "node": ">=20" }
+}

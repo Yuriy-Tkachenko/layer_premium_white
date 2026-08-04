@@ -525,6 +525,41 @@ body {
     margin-top: 35px;
   }
 }
+
+/* Premium motion system */
+.js .hero .eyebrow,
+.js .hero h1,
+.js .hero .description,
+.js .hero .actions {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.js .hero.hero-ready .eyebrow,
+.js .hero.hero-ready h1,
+.js .hero.hero-ready .description,
+.js .hero.hero-ready .actions { opacity: 1; transform: none }
+.js .hero.hero-ready h1 { transition-delay: 90ms }
+.js .hero.hero-ready .description { transition-delay: 180ms }
+.js .hero.hero-ready .actions { transition-delay: 270ms }
+.js .hero .lawyer-photo { opacity: 0; transform: translateX(34px) scale(.985); transition: opacity 1.05s .14s ease, transform 1.15s .14s cubic-bezier(.22,1,.36,1) }
+.js .hero.hero-ready .lawyer-photo { opacity: 1; transform: none }
+
+.js .reveal { opacity: 0; transform: translateY(28px); transition: opacity .75s var(--reveal-delay,0ms) cubic-bezier(.22,1,.36,1), transform .75s var(--reveal-delay,0ms) cubic-bezier(.22,1,.36,1) }
+.js .reveal.is-revealed { opacity: 1; transform: none }
+
+.actions a,.gold-link,.contact-grid button { position: relative; overflow: hidden; isolation: isolate; transition: transform .25s ease,box-shadow .25s ease,border-color .25s ease }
+.actions a:after,.gold-link:after,.contact-grid button:after { content:""; position:absolute; z-index:-1; top:-60%; bottom:-60%; left:-45%; width:28%; background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent); transform:skewX(-18deg); transition:left .7s cubic-bezier(.22,1,.36,1) }
+.actions a:hover:after,.gold-link:hover:after,.contact-grid button:hover:after { left:120% }
+.actions a:hover,.gold-link:hover,.contact-grid button:hover { transform:translateY(-2px); box-shadow:0 12px 28px rgba(35,40,31,.14) }
+.service-grid article,.three-cards article,.steps li,.stage-list article { transition:transform .3s cubic-bezier(.22,1,.36,1),background-color .3s ease,box-shadow .3s ease }
+.three-cards article:hover,.steps li:hover,.stage-list article:hover { transform:translateY(-4px) }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior:auto }
+  *,*:before,*:after { animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; transition-delay:0ms!important }
+  .js .hero .eyebrow,.js .hero h1,.js .hero .description,.js .hero .actions,.js .hero .lawyer-photo,.js .reveal { opacity:1; transform:none }
+}
 .calendar {
   display: block;
   width: 23px !important;
