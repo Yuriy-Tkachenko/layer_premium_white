@@ -13,8 +13,8 @@
       type="image/svg+xml"
       href="icons/image%2039323%20%5BVectorized%5D.svg"
     />
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="sections.css?v=7" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/sections.css?v=8" />
   </head>
   <body>
     <div class="page">
@@ -49,14 +49,21 @@
       </header>
 
       <main class="hero">
-        <img
-          class="lawyer-photo"
-          src="image-39306.png"
-          alt="Адвокат Алексеев"
-          width="1309"
-          height="1787"
-          fetchpriority="high"
-        />
+        <picture>
+          <source
+            srcset="assets/images/image-39306.webp"
+            type="image/webp"
+          />
+          <img
+            class="lawyer-photo"
+            src="assets/images/image-39306.png"
+            alt="Адвокат Андрей Селиванов"
+            width="1309"
+            height="1787"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </picture>
         <section class="content" aria-labelledby="hero-title">
           <p class="eyebrow">
             <span></span>АДВОКАТ ПО УГОЛОВНЫМ ДЕЛАМ В ХАБАРОВСКЕ
@@ -170,7 +177,20 @@
       <section class="premium-section about-section" id="about">
         <div class="section-wrap about-grid">
           <div class="about-photo">
-            <img src="about-lawyer.png" alt="Адвокат Андрей Селиванов" />
+            <picture>
+              <source
+                srcset="assets/images/about-lawyer.webp"
+                type="image/webp"
+              />
+              <img
+                src="assets/images/about-lawyer.png"
+                alt="Адвокат Андрей Селиванов"
+                width="1123"
+                height="1374"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
           </div>
           <div class="about-copy">
             <p class="section-kicker">ОБ АДВОКАТЕ</p>
@@ -544,6 +564,6 @@
         <img src="messengers/telegram.svg" alt="" />
       </a>
     </nav>
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
   </body>
 </html>

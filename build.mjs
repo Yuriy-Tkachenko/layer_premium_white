@@ -2,11 +2,15 @@ import { cpSync, existsSync, mkdirSync, rmSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 
 const root = process.cwd();
+const sourceRoot = resolve(root, "source");
 const output = resolve(root, "dist");
 const assets = [
-  "index.html", "styles.css", "sections.css", "script.js",
-  "main_back.png", "image-39306.png", "about-lawyer.png",
-  "green-gold-background.png",
+  "index.html", "css/styles.css", "css/sections.css", "js/script.js",
+  "assets/images/main_back.png", "assets/images/main_back.webp",
+  "assets/images/image-39306.png", "assets/images/image-39306.webp",
+  "assets/images/about-lawyer.png", "assets/images/about-lawyer.webp",
+  "assets/images/green-gold-background.png",
+  "assets/images/green-gold-background.webp",
   "fonts/cormorant-garamond-cyrillic.woff2",
   "fonts/cormorant-garamond-latin.woff2",
   "fonts/manrope-cyrillic.woff2",
@@ -20,10 +24,10 @@ const assets = [
 rmSync(output, { recursive: true, force: true });
 mkdirSync(output, { recursive: true });
 for (const asset of assets) {
-  const source = resolve(root, asset);
-  if (!existsSync(source)) throw new Error(`Required asset is missing: ${asset}`);
+  const sourcePath = resolve(sourceRoot, asset);
+  if (!existsSync(sourcePath)) throw new Error(`Required asset is missing: ${asset}`);
   const destination = resolve(output, asset);
   mkdirSync(dirname(destination), { recursive: true });
-  cpSync(source, destination);
+  cpSync(sourcePath, destination);
 }
 console.log(`Static build complete: ${assets.length} assets copied to dist`);
