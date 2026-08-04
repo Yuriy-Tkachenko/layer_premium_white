@@ -189,8 +189,10 @@ body {
 .about-photo {
   height: 680px;
   overflow: hidden;
-  border-radius: 180px 180px 12px 12px;
+  border: 1px solid rgba(168, 115, 79, 0.28);
+  border-radius: 28px;
   background: #e5d7c7;
+  box-shadow: 18px 8px 34px -22px rgba(65, 44, 29, 0.32);
 }
 .about-photo img {
   width: 100%;
