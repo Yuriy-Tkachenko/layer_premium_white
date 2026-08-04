@@ -247,12 +247,17 @@ body {
 }
 .gold-link {
   display: inline-flex;
-  margin-top: -22px;
-  padding: 20px 28px;
+  align-items: center;
+  justify-content: center;
+  min-height: 62px;
+  margin-top: 0;
+  padding: 0 30px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 9px;
   background: var(--gold);
   color: #fff;
-  font-size: 12px;
-  font-weight: 600;
+  font: 500 12px/1 "Manrope", Arial, sans-serif;
+  letter-spacing: 0.015em;
 }
 .three-cards {
   display: grid;
