@@ -61,7 +61,25 @@ consultationDialog?.addEventListener("click", (event) => {
   if (!inside) consultationDialog.close();
 });
 
-document.documentElement.classList.add("js");
+document.querySelectorAll('textarea[name="Комментарий"]').forEach((field) => {
+  const resizeComment = () => {
+    field.style.height = "46px";
+    field.style.height = `${Math.max(46, field.scrollHeight)}px`;
+  };
+  const validateComment = () => {
+    const textCharacters = field.value.replace(/\s/g, "").length;
+    field.setCustomValidity(
+      textCharacters >= 10 ? "" : "Введите комментарий не менее чем из 10 символов.",
+    );
+  };
+  resizeComment();
+  validateComment();
+  field.addEventListener("input", () => {
+    resizeComment();
+    validateComment();
+  });
+});
+
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const revealGroups = [
   ".section-heading",
@@ -83,11 +101,16 @@ revealItems.forEach((item, index) => {
   item.style.setProperty("--reveal-delay", `${Math.min(index % 4, 3) * 70}ms`);
 });
 
+const showHero = () => {
+  document.documentElement.classList.add("intro-ready");
+  document.querySelector(".hero")?.classList.add("hero-ready");
+};
+
 if (reducedMotion || !("IntersectionObserver" in window)) {
   revealItems.forEach((item) => item.classList.add("is-revealed"));
-  document.querySelector(".hero")?.classList.add("hero-ready");
+  showHero();
 } else {
-  requestAnimationFrame(() => document.querySelector(".hero")?.classList.add("hero-ready"));
+  requestAnimationFrame(() => requestAnimationFrame(showHero));
   const revealObserver = new IntersectionObserver(
     (entries, observer) => {
       entries.forEach((entry) => {

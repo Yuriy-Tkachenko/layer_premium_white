@@ -372,14 +372,27 @@ body {
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
-.contact-grid input {
+.contact-grid input,
+.contact-grid textarea {
   width: 100%;
-  height: 46px;
   border: 0;
   border-bottom: 1px solid var(--border);
   outline: none;
   background: transparent;
   font: 15px Manrope;
+}
+.contact-grid input {
+  height: 46px;
+}
+.contact-grid textarea {
+  height: 46px;
+  min-height: 46px;
+  padding: 12px 0;
+  overflow-y: hidden;
+  resize: none;
+}
+.contact-grid .comment-field {
+  grid-column: 1 / -1;
 }
 .contact-grid .consent {
   grid-column: 1/-1;
@@ -561,6 +574,12 @@ body {
 }
 
 /* Premium motion system */
+.js .header {
+  opacity: 0;
+  transform: translateY(-16px);
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1), transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.js.intro-ready .header { opacity: 1; transform: none }
 .js .hero .eyebrow,
 .js .hero h1,
 .js .hero .description,
@@ -578,6 +597,15 @@ body {
 .js .hero.hero-ready .actions { transition-delay: 270ms }
 .js .hero .lawyer-photo { opacity: 0; transform: translateX(34px) scale(.985); transition: opacity 1.05s .14s ease, transform 1.15s .14s cubic-bezier(.22,1,.36,1) }
 .js .hero.hero-ready .lawyer-photo { opacity: 1; transform: none }
+.js .hero .hero-benefits > div {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .75s cubic-bezier(.22,1,.36,1), transform .75s cubic-bezier(.22,1,.36,1);
+}
+.js .hero.hero-ready .hero-benefits > div { opacity: 1; transform: none }
+.js .hero.hero-ready .hero-benefits > div:nth-child(1) { transition-delay: 360ms }
+.js .hero.hero-ready .hero-benefits > div:nth-child(2) { transition-delay: 430ms }
+.js .hero.hero-ready .hero-benefits > div:nth-child(3) { transition-delay: 500ms }
 
 .js .reveal { opacity: 0; transform: translateY(28px); transition: opacity .75s var(--reveal-delay,0ms) cubic-bezier(.22,1,.36,1), transform .75s var(--reveal-delay,0ms) cubic-bezier(.22,1,.36,1) }
 .js .reveal.is-revealed { opacity: 1; transform: none }
@@ -592,7 +620,7 @@ body {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior:auto }
   *,*:before,*:after { animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; transition-delay:0ms!important }
-  .js .hero .eyebrow,.js .hero h1,.js .hero .description,.js .hero .actions,.js .hero .lawyer-photo,.js .reveal { opacity:1; transform:none }
+  .js .header,.js .hero .eyebrow,.js .hero h1,.js .hero .description,.js .hero .actions,.js .hero .lawyer-photo,.js .hero .hero-benefits > div,.js .reveal { opacity:1; transform:none }
 }
 
 /* Unified page grid: matches the header and hero gutters */
@@ -1281,7 +1309,7 @@ body {
   width: min(900px, 62vw);
   margin-top: 4.2vh;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1.08fr) repeat(2, minmax(0, 0.96fr));
   overflow: hidden;
   border: 1px solid rgba(168, 115, 79, 0.38);
   border-radius: 16px;
@@ -1331,7 +1359,7 @@ body {
   .hero-benefits {
     width: min(760px, 90vw);
     margin-top: 30px;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1.08fr) repeat(2, minmax(0, 0.96fr));
   }
   .hero-benefits > div {
     min-height: 82px;
@@ -1441,9 +1469,9 @@ body {
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
-.consultation-modal label > input:not([type="checkbox"]) {
+.consultation-modal label > input:not([type="checkbox"]),
+.consultation-modal label > textarea {
   width: 100%;
-  height: 46px;
   border: 0;
   border-bottom: 1px solid var(--border);
   border-radius: 0;
@@ -1452,7 +1480,21 @@ body {
   color: var(--ink);
   font: 15px var(--font-body);
 }
-.consultation-modal label > input:focus {
+.consultation-modal label > input:not([type="checkbox"]) {
+  height: 46px;
+}
+.consultation-modal label > textarea {
+  height: 46px;
+  min-height: 46px;
+  padding: 12px 0;
+  overflow-y: hidden;
+  resize: none;
+}
+.consultation-modal .comment-field {
+  grid-column: 1 / -1;
+}
+.consultation-modal label > input:focus,
+.consultation-modal label > textarea:focus {
   border-color: var(--gold);
 }
 .consultation-modal .consent {

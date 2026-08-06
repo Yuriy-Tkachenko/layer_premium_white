@@ -216,6 +216,9 @@ h1 em {
   color: #a86e49;
   font-style: normal;
 }
+.hero-title-detail {
+  font-size: calc(1em - 9px);
+}
 .description {
   margin: 4.2vh 0 0;
   padding-left: 1.85vw;

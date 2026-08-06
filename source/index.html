@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>document.documentElement.classList.add("js");</script>
     <meta
       name="description"
       content="Адвокат Селиванов — персональная защита по уголовным делам в Хабаровске"
@@ -33,7 +34,7 @@
           <a href="#stages">ЭТАПЫ ЗАЩИТЫ</a><a href="#faq">ВОПРОС-ОТВЕТ</a
           ><a href="#contacts">КОНТАКТЫ</a>
         </nav>
-        <a class="header-button" href="#contacts"
+        <a class="header-button" href="#contacts" data-open-consultation
           ><img class="calendar" src="icons/calendar.svg?v=2" alt="" />ЧАСТНАЯ
           КОНСУЛЬТАЦИЯ</a
         >
@@ -69,7 +70,9 @@
             <span></span>АДВОКАТ ПО УГОЛОВНЫМ ДЕЛАМ В ХАБАРОВСКЕ
           </p>
           <h1 id="hero-title">
-            ЗАЩИТА<br />ПО УГОЛОВНЫМ ДЕЛАМ<br />В ХАБАРОВСКЕ
+            ЗАЩИТА<br /><span class="hero-title-detail"
+              >ПО УГОЛОВНЫМ ДЕЛАМ<br />В ХАБАРОВСКЕ</span
+            >
           </h1>
           <p class="description">
             Лично подключаюсь к делу на любой стадии, провожу анализ рисков<br
@@ -88,7 +91,11 @@
           <div class="hero-benefits" aria-label="Преимущества адвоката">
             <div>
               <img src="icons/benefit-shield.svg" alt="" />
-              <span>Стаж службы в МВД<br /><strong>2017–2026</strong></span>
+              <span
+                >Стаж службы в<br />правоохранительных органах<br /><strong
+                  >2012–2026</strong
+                ></span
+              >
             </div>
             <div>
               <img src="icons/benefit-scales.svg" alt="" />
@@ -197,11 +204,11 @@
             <h2>Понимаю систему изнутри</h2>
             <p>
               Юридическое образование получил в Дальневосточном юридическом
-              институте МВД России имени И. Ф. Шилова. Специализация —
+              институте имени И. Ф. Шилова. Специализация —
               правоохранительная деятельность.
             </p>
             <p>
-              Девять лет службы в органах МВД России дали практическое понимание
+              Служба в правоохранительных органах с 2012 по 2026 год дала практическое понимание
               того, как принимаются процессуальные решения и где возникают
               критические риски. С 2026 года работаю адвокатом, регистрационный
               номер 27/1389 в реестре адвокатов Хабаровского края.
@@ -211,10 +218,10 @@
               видеть риски и использовать предусмотренные законом возможности.
             </blockquote>
             <div class="fact-row">
-              <span><b>2017–2026</b>служба в МВД России</span
+              <span><b>2012–2026</b>служба в правоохранительных органах</span
               ><span><b>Рег. № 27/1389</b>в реестре адвокатов</span
               ><span
-                ><b>ДВЮИ МВД России</b>правоохранительная деятельность</span
+                ><b>ДВЮИ</b>правоохранительная деятельность</span
               >
             </div>
           </div>
@@ -418,7 +425,10 @@
               <a href="tel:+79941441349">+7 (994) 144-13-49</a
               ><a href="mailto:selivanov2503@gmail.com"
                 >selivanov2503@gmail.com</a
-              ><span>Хабаровск · Пн–Пт, 10:00–20:00</span>
+              ><span
+                >г. Хабаровск, ул. Дикопольцева, 26, к. 2, оф. 8 · Пн–Пт,
+                10:00–20:00</span
+              >
             </div>
           </div>
           <form
@@ -432,11 +442,14 @@
                 name="Телефон"
                 type="tel"
                 required /></label
-            ><label
-              >Электронная почта *<input
-                name="Email"
-                type="email"
-                required /></label
+            ><label class="comment-field"
+              >Комментарий *<textarea
+                name="Комментарий"
+                rows="1"
+                minlength="10"
+                maxlength="1000"
+                placeholder="Кратко опишите вашу ситуацию"
+                required></textarea></label
             ><label class="consent"
               ><input type="checkbox" required /> Даю согласие на обработку
               персональных данных для ответа на обращение.</label
@@ -469,7 +482,10 @@
             ><a href="mailto:selivanov2503@gmail.com"
               >selivanov2503@gmail.com</a
             >
-            <p>Хабаровск<br />Пн–Пт: 10:00–20:00</p>
+            <p>
+              г. Хабаровск, ул. Дикопольцева, 26, к. 2, оф. 8<br />Пн–Пт:
+              10:00–20:00
+            </p>
             <div class="socials">
               <a href="https://wa.me/79941441349"
                 ><img src="messengers/whatsapp.svg" alt="WhatsApp" /></a
@@ -517,13 +533,14 @@
               autocomplete="tel"
               required
           /></label>
-          <label
-            >Электронная почта *<input
-              name="Email"
-              type="email"
-              autocomplete="email"
-              required
-          /></label>
+          <label class="comment-field"
+            >Комментарий *<textarea
+              name="Комментарий"
+              rows="1"
+              minlength="10"
+              maxlength="1000"
+              placeholder="Кратко опишите вашу ситуацию"
+              required></textarea></label>
           <label class="consent"
             ><input type="checkbox" required /> Даю согласие на обработку
             персональных данных для ответа на обращение.</label
