@@ -2,6 +2,21 @@ const http = require("http");
 const fs = require("fs");
 const path = require("path");
 
+const envFile = path.resolve(__dirname, "../../.env.local");
+if (fs.existsSync(envFile)) {
+  fs.readFileSync(envFile, "utf8")
+    .split(/\r?\n/)
+    .forEach((line) => {
+      const separator = line.indexOf("=");
+      if (separator < 1 || line.trimStart().startsWith("#")) return;
+      const key = line.slice(0, separator).trim();
+      const value = line.slice(separator + 1).trim();
+      if (!process.env[key]) process.env[key] = value;
+    });
+}
+
+const contactHandler = require("../../api/contact.js");
+
 const root = path.resolve(__dirname, "..");
 const port = Number(process.env.PORT) || 4173;
 const types = {
@@ -16,6 +31,12 @@ const types = {
 http
   .createServer((request, response) => {
     const pathname = decodeURIComponent(request.url.split("?")[0]);
+
+    if (pathname === "/api/contact") {
+      contactHandler(request, response);
+      return;
+    }
+
     const relativePath =
       pathname === "/" ? "index.html" : pathname.replace(/^\/+/, "");
     const filePath = path.resolve(root, relativePath);

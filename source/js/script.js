@@ -80,6 +80,54 @@ document.querySelectorAll('textarea[name="Комментарий"]').forEach((fi
   });
 });
 
+document.querySelectorAll("form").forEach((form) => {
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+
+    const submitButton = form.querySelector('button[type="submit"]');
+    const fields = [...form.querySelectorAll("input, textarea")].filter(
+      (field) => field.type !== "checkbox",
+    );
+    const originalButtonText = submitButton?.textContent;
+
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = "ОТПРАВЛЯЕМ…";
+    }
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: fields[0]?.value.trim(),
+          phone: fields[1]?.value.trim(),
+          comment: fields[2]?.value.trim(),
+          website: "",
+        }),
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(result.error || "Не удалось отправить сообщение");
+
+      form.reset();
+      fields.forEach((field) => field.dispatchEvent(new Event("input")));
+      if (submitButton) submitButton.textContent = "СООБЩЕНИЕ ОТПРАВЛЕНО ✓";
+      if (form.closest("dialog")) setTimeout(() => form.closest("dialog")?.close(), 1400);
+    } catch (error) {
+      alert(error.message || "Не удалось отправить сообщение. Позвоните нам по телефону.");
+      if (submitButton) submitButton.textContent = originalButtonText;
+    } finally {
+      if (submitButton) {
+        submitButton.disabled = false;
+        if (submitButton.textContent !== "СООБЩЕНИЕ ОТПРАВЛЕНО ✓") {
+          submitButton.textContent = originalButtonText;
+        }
+      }
+    }
+  });
+});
+
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const revealGroups = [
   ".section-heading",
