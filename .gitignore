@@ -3,3 +3,7 @@ dist/
 node_modules/
 *.log
 .env.local
+.telegram-config.php
+.env
+.env.*
+!.env.example

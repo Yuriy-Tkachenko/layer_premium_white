@@ -2,6 +2,25 @@ if ("scrollRestoration" in history) {
   history.scrollRestoration = "manual";
 }
 
+const YM_COUNTER_ID = 111486716;
+function reachGoal(name) {
+  if (typeof ym !== "undefined") {
+    ym(YM_COUNTER_ID, "reachGoal", name);
+  }
+}
+
+document.addEventListener("click", (event) => {
+  if (event.target.closest('a[href^="tel:"]')) reachGoal("phone");
+});
+document.addEventListener("click", (event) => {
+  if (
+    event.target.closest(
+      'a[href*="wa.me"], a[href*="whatsapp"], a[href*="t.me"], a[href*="max.ru"]',
+    )
+  )
+    reachGoal("messenger");
+});
+
 window.addEventListener("pageshow", () => {
   requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0 }));
 });
@@ -69,7 +88,9 @@ document.querySelectorAll('textarea[name="Комментарий"]').forEach((fi
   const validateComment = () => {
     const textCharacters = field.value.replace(/\s/g, "").length;
     field.setCustomValidity(
-      textCharacters >= 10 ? "" : "Введите комментарий не менее чем из 10 символов.",
+      textCharacters === 0 || textCharacters >= 10
+        ? ""
+        : "Введите комментарий не менее чем из 10 символов.",
     );
   };
   resizeComment();
@@ -110,10 +131,9 @@ document.querySelectorAll("form").forEach((form) => {
       const result = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(result.error || "Не удалось отправить сообщение");
 
-      form.reset();
-      fields.forEach((field) => field.dispatchEvent(new Event("input")));
-      if (submitButton) submitButton.textContent = "СООБЩЕНИЕ ОТПРАВЛЕНО ✓";
-      if (form.closest("dialog")) setTimeout(() => form.closest("dialog")?.close(), 1400);
+      reachGoal("lead");
+      window.location.href = "thanks.html";
+      return;
     } catch (error) {
       alert(error.message || "Не удалось отправить сообщение. Позвоните нам по телефону.");
       if (submitButton) submitButton.textContent = originalButtonText;

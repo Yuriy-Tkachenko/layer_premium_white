@@ -1,0 +1,9 @@
+Options -Indexes
+DirectoryIndex index.html
+
+RewriteEngine On
+RewriteRule ^api/contact/?$ api/contact.php [L,QSA]
+
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>
